@@ -34,6 +34,6 @@ public class Rook extends Piece {
                 if (!this.board.locationIsEmpty(row, i))
                     return false;
         }
-        return false;
+        return true;
     }
 }

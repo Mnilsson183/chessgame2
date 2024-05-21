@@ -35,6 +35,6 @@ public class Bishop extends Piece {
         for (int row_i = currentRow; row_i != row; row_i += rowCoe, column_i += columnCoe)
             if (this.board.locationIsEmpty(row_i, column_i))
                 return false;
-        return false;
+        return true;
     }
 }
