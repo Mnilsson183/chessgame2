@@ -16,8 +16,6 @@ abstract public class Piece {
 
     abstract public boolean isValidMove(int row, int column);
 
-    abstract public boolean isBlocked(int row, int column);
-
     public Page generatePage() {
         Page page = new Page();
         for (int row : board.boardRows) {

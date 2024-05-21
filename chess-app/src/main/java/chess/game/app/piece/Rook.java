@@ -15,12 +15,25 @@ public class Rook extends Piece {
     public boolean isValidMove(int row, int column) {
         if (!checkCandidate(row, column))
             return false;
+        if (!isNotBlocked(row, column))
+            return false;
         int currentRow = this.location.getRow();
         int currentColumn = this.location.getColumn();
-        if (isBlocked(row, column))
-            return false;
         return (row == currentRow) ^ (column == currentColumn);
     }
 
-    private boolean
+    private boolean isNotBlocked(int row, int column) {
+        int currentRow = this.location.getRow();
+        int currentColumn = this.location.getColumn();
+        if (currentRow != row) {
+            for (int i = currentRow; i != row; i += currentRow > row ? -1 : 1)
+                if (!this.board.locationIsEmpty(i, column))
+                    return false;
+        } else if (currentColumn == column) {
+            for (int i = currentColumn; i != column; i += currentColumn > column ? -1 : 1)
+                if (!this.board.locationIsEmpty(row, i))
+                    return false;
+        }
+        return false;
+    }
 }
