@@ -23,15 +23,10 @@ public class Board {
     public int boardColumns;
     private Piece[][] board;
 
-    private boolean locationIsEmpty(int row, int column) {
-        if (board[row][column] == null)
-            return false;
-        else
-            return true;
-    }
-
     Board() {
         Piece[][] newBoard = new Piece[defaultBoardRows][defaultBoardColumns];
+        this.boardRows = defaultBoardRows;
+        this.boardColumns = defaultBoardColumns;
         for (char[] row : defaultBoard) {
             for (char c : row) {
                 switch (c) {
@@ -47,5 +42,24 @@ public class Board {
 
     Board(Board b) {
 
+    }
+
+    public boolean locationIsEmpty(int row, int column) {
+        if (board[row][column] == null)
+            return false;
+        else
+            return true;
+    }
+
+    public boolean isTakeable(int row, int column, char orginSide) {
+        return orginSide == getBoardPiece(row, column).getSide();
+    }
+
+    public boolean isOutOfBounds(int row, int column) {
+        return (row > this.boardRows || column > this.boardColumns);
+    }
+
+    private Piece getBoardPiece(int row, int column) {
+        return board[row][column];
     }
 }
