@@ -8,12 +8,16 @@ import java.awt.Point;
 public class Location {
     private Point location;
 
-    Location(Point point) {
-        location = point;
+    public Location(Point point) {
+        this.location = point;
     }
 
-    Location(int r, int c) {
-        location = new Point(r, c);
+    public Location(int r, int c) {
+        this.location = new Point(r, c);
+    }
+
+    public Location(Location location) {
+        this.location = new Point(location.getRow(), location.getColumn());
     }
 
     public int getRow() {

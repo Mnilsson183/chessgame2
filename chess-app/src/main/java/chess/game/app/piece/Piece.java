@@ -4,9 +4,10 @@ import chess.game.app.util.Location;
 import chess.game.app.board.*;
 
 abstract public class Piece {
-    public Location location;
-    public Board board;
-    public char side;
+    private Location location;
+    private Board board;
+    private char side;
+    private char pieceChar;
 
     public Piece(Location location, Board board, char side) {
         this.location = location;
@@ -43,7 +44,15 @@ abstract public class Piece {
         return this.location.getColumn();
     }
 
+    public Location getLocation() {
+        return new Location(this.location);
+    }
+
     public char getSide() {
         return this.side;
+    }
+
+    public char getPieceChar() {
+        return this.pieceChar;
     }
 }
