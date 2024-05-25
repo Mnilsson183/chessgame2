@@ -2,6 +2,8 @@ package chess.game.app.piece;
 
 import chess.game.app.util.Location;
 import chess.game.app.board.*;
+import chess.game.app.bookofmoves.Move;
+import chess.game.app.bookofmoves.Page;
 
 abstract public class Piece {
     private Location location;
@@ -19,12 +21,18 @@ abstract public class Piece {
 
     public Page generatePage() {
         Page page = new Page();
-        for (int row : board.boardRows) {
-            for (int column : board.boardColumns) {
-                if (isValidMove(row, column))
-                    page.addMove(row, column);
+        for (int row = 0; row < board.boardRows; row++) {
+            for (int column = 0; column < board.boardColumns; column++) {
+                if (isValidMove(row, column)) {
+                    page.addMove(
+                            new Move(
+                                    this,
+                                    this.board.getBoardPiece(row, column),
+                                    new Location(row, column)));
+                }
             }
         }
+        return page;
     }
 
     public boolean checkCandidate(int row, int column) {

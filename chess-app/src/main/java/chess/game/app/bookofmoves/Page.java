@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public class Page {
     ArrayList<Move> moves;
 
-    Page() {
+    public Page() {
         moves = new ArrayList<Move>();
     }
 

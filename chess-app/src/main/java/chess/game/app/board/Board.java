@@ -59,7 +59,7 @@ public class Board {
         return (row > this.boardRows || column > this.boardColumns);
     }
 
-    private Piece getBoardPiece(int row, int column) {
+    public Piece getBoardPiece(int row, int column) {
         return board[row][column];
     }
 }

@@ -27,4 +27,8 @@ public class Location {
     public int getColumn() {
         return (int) location.getY();
     }
+
+    public boolean equals(Location otherLocation) {
+        return this.getRow() == otherLocation.getRow() && this.getColumn() == otherLocation.getColumn();
+    }
 }
