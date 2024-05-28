@@ -7,7 +7,7 @@ import chess.game.app.util.Location;
  * Queen
  */
 public class Queen extends Piece {
-    Queen(Location location, Board board, char side) {
+    public Queen(Location location, Board board, char side) {
         super(location, board, side);
         this.pieceChar = 'q';
     }

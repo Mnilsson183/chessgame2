@@ -8,7 +8,7 @@ import chess.game.app.util.Location;
  */
 public class Bishop extends Piece {
 
-    Bishop(Location location, Board board, char side) {
+    public Bishop(Location location, Board board, char side) {
         super(location, board, side);
         this.pieceChar = 'b';
     }

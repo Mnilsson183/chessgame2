@@ -8,7 +8,7 @@ import chess.game.app.util.Location;
  */
 public class Rook extends Piece {
 
-    Rook(Location location, Board board, char side) {
+    public Rook(Location location, Board board, char side) {
         super(location, board, side);
         this.pieceChar = 'r';
     }

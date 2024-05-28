@@ -8,7 +8,7 @@ import chess.game.app.board.*;
  */
 public class Pawn extends Piece {
 
-    Pawn(Location location, Board board, char side) {
+    public Pawn(Location location, Board board, char side) {
         super(location, board, side);
         this.pieceChar = 'p';
     }

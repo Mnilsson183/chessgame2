@@ -8,7 +8,7 @@ import chess.game.app.util.Location;
  */
 public class Knight extends Piece {
 
-    Knight(Location location, Board board, char side) {
+    public Knight(Location location, Board board, char side) {
         super(location, board, side);
         this.pieceChar = 'k';
     }
