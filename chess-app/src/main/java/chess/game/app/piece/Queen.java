@@ -9,6 +9,7 @@ import chess.game.app.util.Location;
 public class Queen extends Piece {
     Queen(Location location, Board board, char side) {
         super(location, board, side);
+        this.pieceChar = 'q';
     }
 
     public boolean isValidMove(int row, int column) {
@@ -17,5 +18,12 @@ public class Queen extends Piece {
         if (!isNotBlocked(row, column))
             return false;
 
+    }
+    public Piece copyPiece(){
+        return new Queen(
+            this.getLocation(),
+            this.board,
+            this.side
+        );
     }
 }

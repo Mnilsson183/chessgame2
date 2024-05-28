@@ -10,6 +10,7 @@ public class Bishop extends Piece {
 
     Bishop(Location location, Board board, char side) {
         super(location, board, side);
+        this.pieceChar = 'b';
     }
 
     public boolean isValidMove(int row, int column) {
@@ -36,5 +37,13 @@ public class Bishop extends Piece {
             if (this.board.locationIsEmpty(row_i, column_i))
                 return false;
         return true;
+    }
+
+    public Piece copyPiece(){
+        return new Bishop(
+            this.getLocation(),
+            this.board,
+            this.side
+        );
     }
 }

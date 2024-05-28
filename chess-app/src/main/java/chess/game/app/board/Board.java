@@ -1,6 +1,8 @@
 package chess.game.app.board;
 
 import chess.game.app.piece.*;
+import chess.game.app.bookofmoves.*;
+import chess.game.app.util.*;
 
 /**
  * Board
@@ -42,6 +44,35 @@ public class Board {
 
     Board(Board b) {
 
+    }
+
+
+    // generate from a piece location
+    private Page generatePage(int r, int c) {
+        Page page = new Page();
+        Piece piece = getBoardPiece(boardRows, boardColumns);
+        if(piece == null) return null;
+        for (int row = 0; row < this.boardRows; row++) {
+            for (int column = 0; column < this.boardColumns; column++) {
+                if (piece.isValidMove(row, column)) {
+                    page.addMove(
+                        new Move(
+                            piece,
+                            this.getBoardPiece(row, column),
+                            new Location(row, column)));
+                }
+            }
+        }
+        return page;
+    }
+
+    public Piece[][] initBrain(){
+        Piece[][] internalBoard = new Piece[this.boardRows][this.boardColumns];
+        for(int r = 0; r < this.boardRows; r++){
+            for(int c = 0; c < this.boardColumns; c++){
+                internalBoard[r][c] = new Piece(this.board[r][c]);
+            }
+        }
     }
 
     public boolean locationIsEmpty(int row, int column) {

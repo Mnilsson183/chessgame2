@@ -9,6 +9,7 @@ import chess.game.app.util.Location;
 public class King extends Piece {
     King(Location location, Board board, char side) {
         super(location, board, side);
+        this.pieceChar = 'K';
     }
 
     // still ne to impl moving into check
@@ -25,5 +26,14 @@ public class King extends Piece {
             return true;
         else
             return false;
+    }
+
+
+    public Piece copyPiece(){
+        return new King(
+            this.getLocation(),
+            this.board,
+            this.side
+        );
     }
 }

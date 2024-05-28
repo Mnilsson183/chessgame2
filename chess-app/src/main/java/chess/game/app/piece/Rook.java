@@ -10,6 +10,7 @@ public class Rook extends Piece {
 
     Rook(Location location, Board board, char side) {
         super(location, board, side);
+        this.pieceChar = 'r';
     }
 
     public boolean isValidMove(int row, int column) {
@@ -35,5 +36,12 @@ public class Rook extends Piece {
                     return false;
         }
         return true;
+    }
+    public Piece copyPiece(){
+        return new Rook(
+            this.getLocation(),
+            this.board,
+            this.side
+        );
     }
 }
