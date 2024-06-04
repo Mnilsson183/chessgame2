@@ -14,7 +14,16 @@ public class Knight extends Piece {
     }
 
     public boolean isValidMove(int r, int c){
+        int rowDiff = this.location.getRow() - r;
+        int colDiff = this.location.getColumn() - c;
 
+        if (Math.abs(rowDiff) == 2 && Math.abs(colDiff) == 1) {
+            return true;
+        } else if (Math.abs(rowDiff) == 1 && Math.abs(colDiff) == 2) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
 

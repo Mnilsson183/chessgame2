@@ -14,8 +14,7 @@ public class Pawn extends Piece {
     }
 
     public boolean isValidMove(int r, int c) {
-        int currentRow = this.location.getRow();
-        int currentColumn = this.location.getColumn();
+        
     }
 
     public Piece copyPiece(){

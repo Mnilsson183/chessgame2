@@ -18,10 +18,8 @@ public class Bishop extends Piece {
             return false;
         if (!isNotBlocked(row, column))
             return false;
-        int currentRow = this.location.getRow();
-        int currentColumn = this.location.getColumn();
-        int differenceRow = row - currentRow;
-        int differenceColumn = column - currentColumn;
+        int differenceRow = row - this.location.getRow();
+        int differenceColumn = column - this.location.getColumn();
         return differenceRow == differenceColumn;
     }
 

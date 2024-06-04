@@ -52,12 +52,11 @@ public class Board {
                 madeBoard[r][c] = initBoardPiecesFromCharPiecesHelper(charBoard[r][c], new Location(r, c), charSideBoard[r][c]);
             }
         }
+        return madeBoard;
     }
 
     private Piece initBoardPiecesFromCharPiecesHelper(char c, Location location, char side){
         switch (c) {
-            case ' ':
-                return null;
             case 'p':
                 return new Pawn(location, this, side);
             case 'k':
@@ -67,10 +66,8 @@ public class Board {
             case 'q':
                 return new Queen(location, this, side);
             case ' ':
-                return null;
-        
             default:
-                break;
+                return null;
         }
     }
 
@@ -78,7 +75,7 @@ public class Board {
     // generate from a piece location
     private Page generatePage(int r, int c) {
         Page page = new Page();
-        Piece piece = getBoardPiece(boardRows, boardColumns);
+        Piece piece = getPiece(boardRows, boardColumns);
         if(piece == null) return null;
         for (int row = 0; row < this.boardRows; row++) {
             for (int column = 0; column < this.boardColumns; column++) {
@@ -86,7 +83,7 @@ public class Board {
                     page.addMove(
                         new Move(
                             piece,
-                            this.getBoardPiece(row, column),
+                            this.getPiece(row, column),
                             new Location(row, column)));
                 }
             }
@@ -112,14 +109,14 @@ public class Board {
     }
 
     public boolean isTakeable(int row, int column, char orginSide) {
-        return orginSide == getBoardPiece(row, column).getSide();
+        return orginSide == getPiece(row, column).getSide();
     }
 
     public boolean isOutOfBounds(int row, int column) {
         return (row > this.boardRows || column > this.boardColumns);
     }
 
-    public Piece getBoardPiece(int row, int column) {
+    public Piece getPiece(int row, int column) {
         return board[row][column];
     }
 }

@@ -17,8 +17,53 @@ public class Queen extends Piece {
             return false;
         if (!isNotBlocked(row, column))
             return false;
+        if (this.location.getRow() == row ^ this.location.getColumn() == column) {
+            return true;
+        } else if (Math.abs(this.location.getRow() - row) == Math.abs(this.location.getColumn() - column)) {
+            return true;
+        } else {
+            return false;
+        }
 
     }
+
+    private boolean isNotBlocked(int row, int column){
+        int rowDiff = this.location.getRow() - row;
+        int colDiff = this.location.getColumn() - column;
+
+        if (this.location.getRow() == row) {
+            int start = Math.min(this.location.getColumn(), column);
+            int end = Math.max(this.location.getColumn(), column);
+            for (int i = start + 1; i < end; i++) {
+                if (this.board.getPiece(row, i) != null) {
+                    return false;
+                }
+            }
+        } else if (this.location.getColumn() == column) {
+            int start = Math.min(this.location.getRow(), row);
+            int end = Math.max(this.location.getRow(), row);
+            for (int i = start + 1; i < end; i++) {
+                if (this.board.getPiece(i, column) != null) {
+                    return false;
+                }
+            }
+        } else if (Math.abs(rowDiff) == Math.abs(colDiff)) {
+            int startRow = Math.min(this.location.getRow(), row);
+            int startCol = Math.min(this.location.getColumn(), column);
+            int endRow = Math.max(this.location.getRow(), row);
+            int r = startRow;
+            int c = startCol;
+            while (r < endRow) {
+                r++;
+                c++;
+                if (this.board.getPiece(r, c) != null) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
     public Piece copyPiece(){
         return new Queen(
             this.getLocation(),
