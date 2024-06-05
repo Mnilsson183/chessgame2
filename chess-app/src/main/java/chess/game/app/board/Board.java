@@ -35,24 +35,52 @@ public class Board {
     public int boardColumns;
     private Piece[][] board;
 
-    Board() {
-        Piece[][] newBoard = new Piece[defaultBoardRows][defaultBoardColumns];
+    public Board() {
         this.boardRows = defaultBoardRows;
         this.boardColumns = defaultBoardColumns;
+        this.board = initBoardPiecesFromCharArray(defaultBoardPiecesMap, defaultBoardSidesMap);
     }
 
-    Board(Board b) {
-
+    public Board(Board b) {
+        this.boardRows = b.boardRows;
+        this.boardColumns = b.boardColumns;
+        this.board = b.initBoardPiecesFromCharArray(b.getCharBoard(), b.getCharBoardSides());
     }
-
-    private Piece[][] initBoardPiecesFromCharPieces(char[][] charBoard, char[][] charSideBoard){
-        Piece[][] madeBoard = new Piece[this.boardRows][this.boardColumns];
-        for (int r = 0; r < this.boardRows; r++) {
-            for (int c = 0; c < this.boardColumns; c++) {
-                madeBoard[r][c] = initBoardPiecesFromCharPiecesHelper(charBoard[r][c], new Location(r, c), charSideBoard[r][c]);
+    
+    public char[][] getCharBoard(){
+        char[][] charBoard = new char[this.boardRows][this.boardColumns];
+        for(int r = 0; r < this.boardRows; r++){
+            for(int c = 0; c < this.boardColumns; c++){
+                charBoard[r][c] = this.board[r][c].getPieceChar();
             }
         }
-        return madeBoard;
+        return charBoard;
+    }
+
+    public char[][] getCharBoardSides(){
+        char[][] charSideBoard = new char[this.boardRows][this.boardColumns];
+        for(int r = 0; r < this.boardRows; r++){
+            for(int c = 0; c < this.boardColumns; c++){
+                charSideBoard[r][c] = this.board[r][c].getSide();
+            }
+        }
+        return charSideBoard;
+    }
+
+    private Piece[][] initBoardPiecesFromCharArray(char[][] charBoard, char[][] charSideBoard){
+        if (charBoard.length != this.boardRows || charBoard[0].length != this.boardColumns) {
+            return null;
+        } else if(charSideBoard.length != this.boardRows || charSideBoard[0].length != this.boardColumns){
+            return null;
+        }
+
+        Piece[][] newBoard = new Piece[this.boardRows][this.boardColumns];
+        for (int r = 0; r < this.boardRows; r++) {
+            for (int c = 0; c < this.boardColumns; c++) {
+                newBoard[r][c] = initBoardPiecesFromCharPiecesHelper(charBoard[r][c], new Location(r, c), charSideBoard[r][c]);
+            }
+        }
+        return newBoard;
     }
 
     private Piece initBoardPiecesFromCharPiecesHelper(char c, Location location, char side){
@@ -71,6 +99,17 @@ public class Board {
         }
     }
 
+    public Book generateBook() {
+        Book book = new Book();
+        for (int r = 0; r < this.boardRows; r++) {
+            for (int c = 0; c < this.boardColumns; c++) {
+                if (this.board[r][c] != null) {
+                    book.addPage(generatePage(r, c));
+                }
+            }
+        }
+        return book;
+    }
 
     // generate from a piece location
     private Page generatePage(int r, int c) {

@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public class Book {
     private ArrayList<Move> moves;
 
-    Book() {
+    public Book() {
         this.moves = new ArrayList<Move>();
     }
 
