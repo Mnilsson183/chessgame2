@@ -6,6 +6,7 @@ import chess.game.app.bookofmoves.*;
 public class Human extends Brain{
    public Human(Board board){
        super(board);
+       this.name = "Human";
    }
    
     public Move getMove(Book book){

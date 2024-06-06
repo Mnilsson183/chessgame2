@@ -4,6 +4,7 @@ import chess.game.app.board.Board;
 import chess.game.app.bookofmoves.*;
 
 public abstract class Brain {
+    String name;
     char[][] internalBoard;
     char[][] internalBoardSides;
     Board board;

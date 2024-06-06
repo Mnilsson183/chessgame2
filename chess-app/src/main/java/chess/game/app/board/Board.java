@@ -41,6 +41,15 @@ public class Board {
         this.board = initBoardPiecesFromCharArray(defaultBoardPiecesMap, defaultBoardSidesMap);
     }
 
+    public Board(char[][] boardPiecesMap, char[][] boardSidesMap) {
+        assert boardPiecesMap.length == boardSidesMap.length;
+        assert boardPiecesMap[0].length == boardSidesMap[0].length;
+        this.boardRows = boardPiecesMap.length;
+        this.boardColumns = boardPiecesMap[0].length;
+        this.board = initBoardPiecesFromCharArray(boardPiecesMap, boardSidesMap);
+    }
+
+
     public Board(Board b) {
         this.boardRows = b.boardRows;
         this.boardColumns = b.boardColumns;
@@ -157,5 +166,20 @@ public class Board {
 
     public Piece getPiece(int row, int column) {
         return board[row][column];
+    }
+
+    public String toString() {
+        String boardString = "";
+        for (int r = 0; r < this.boardRows; r++) {
+            for (int c = 0; c < this.boardColumns; c++) {
+                if (this.board[r][c] == null) {
+                    boardString += " ";
+                } else {
+                    boardString += this.board[r][c].getPieceChar();
+                }
+            }
+            boardString += "\n";
+        }
+        return boardString;
     }
 }
