@@ -55,12 +55,20 @@ public class Board {
         this.boardColumns = b.boardColumns;
         this.board = b.initBoardPiecesFromCharArray(b.getCharBoard(), b.getCharBoardSides());
     }
+
+    public boolean isGameOver(){
+        return false;
+    }
     
     public char[][] getCharBoard(){
         char[][] charBoard = new char[this.boardRows][this.boardColumns];
         for(int r = 0; r < this.boardRows; r++){
             for(int c = 0; c < this.boardColumns; c++){
-                charBoard[r][c] = this.board[r][c].getPieceChar();
+                if(this.board[r][c] == null){
+                    charBoard[r][c] = ' ';
+                } else {
+                    charBoard[r][c] = this.board[r][c].getPieceChar();
+                }
             }
         }
         return charBoard;
@@ -70,7 +78,11 @@ public class Board {
         char[][] charSideBoard = new char[this.boardRows][this.boardColumns];
         for(int r = 0; r < this.boardRows; r++){
             for(int c = 0; c < this.boardColumns; c++){
-                charSideBoard[r][c] = this.board[r][c].getSide();
+                if(this.board[r][c] == null){
+                    charSideBoard[r][c] = ' ';
+                }else{
+                    charSideBoard[r][c] = this.board[r][c].getSide();
+                }
             }
         }
         return charSideBoard;
@@ -102,10 +114,35 @@ public class Board {
                 return new Bishop(location, this, side);
             case 'q':
                 return new Queen(location, this, side);
+            case 'r':
+                return new Rook(location, this, side);
+            case 'K':
+                return new King(location, this, side);
             case ' ':
             default:
                 return null;
         }
+    }
+
+    public boolean executeMove(Move move) {
+        if(!validateMove(move)) return false;
+        return movePiece(move);
+    }
+
+    private boolean movePiece(Move move){
+        Piece orginPiece = this.getPiece(move.getOrginLocation());
+        Location destinationLocation = move.getDestinationLocation();
+        Location takenLocation = move.getTakenLocation();
+
+        this.board[takenLocation.getRow()][takenLocation.getColumn()] = null;
+        this.board[destinationLocation.getRow()][destinationLocation.getColumn()] = orginPiece;
+        this.board[orginPiece.getRow()][orginPiece.getColumn()] = null;
+        return true;
+    }
+
+    private boolean validateMove(Move move){
+        Piece orginPiece = this.getPiece(move.getOrginLocation());
+        return orginPiece.isValidMove(move.getDestinationLocation());
     }
 
     public Book generateBook() {
@@ -150,6 +187,7 @@ public class Board {
     }
 
     public boolean locationIsEmpty(int row, int column) {
+        if(this.isOutOfBounds(row, column)) return false;
         if (board[row][column] == null)
             return false;
         else
@@ -161,11 +199,16 @@ public class Board {
     }
 
     public boolean isOutOfBounds(int row, int column) {
-        return (row > this.boardRows || column > this.boardColumns);
+        return (row >= this.boardRows || column >= this.boardColumns || row < 0 || column < 0);
     }
 
-    public Piece getPiece(int row, int column) {
+    private Piece getPiece(int row, int column) {
+        if(this.isOutOfBounds(row, column)) return null;
         return board[row][column];
+    }
+
+    private Piece getPiece(Location location) {
+        return getPiece(location.getRow(), location.getColumn());
     }
 
     public String toString() {

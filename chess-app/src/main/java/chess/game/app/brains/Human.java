@@ -10,6 +10,7 @@ public class Human extends Brain{
    }
    
     public Move getMove(Book book){
-         return book.getMove(0);
+        System.out.println(this.board);
+        return book.getMove(0);
     }
 }

@@ -17,10 +17,12 @@ public class Book {
     }
 
     public void addPage(Page page) {
+        if(page == null) return;
         moves.addAll(page.getMoves());
     }
 
     public Move getMove(int i) {
+        if(i >= this.moves.size()) return null;
         return this.moves.get(i);
     }
 

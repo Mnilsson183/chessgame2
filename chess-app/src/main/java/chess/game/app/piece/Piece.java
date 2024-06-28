@@ -18,6 +18,10 @@ abstract public class Piece {
     abstract public Piece copyPiece();
     abstract public boolean isValidMove(int row, int column);
 
+    public boolean isValidMove(Location location){
+        return isValidMove(location.getRow(), location.getColumn());
+    }
+
     public boolean checkCandidate(int row, int column) {
         if (this.board.isOutOfBounds(row, column))
             return false;

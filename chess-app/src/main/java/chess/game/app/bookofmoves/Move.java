@@ -8,9 +8,9 @@ import chess.game.app.util.*;
  * Move
  */
 public class Move {
-    Piece orginPiece;
-    Piece takenPiece;
-    Location destinationLocation;
+    private Piece orginPiece;
+    private Piece takenPiece;
+    private Location destinationLocation;
 
     public Move(Piece orginPiece, Piece takenPiece, Location destinationLocation) {
         this.orginPiece = orginPiece;
@@ -18,12 +18,16 @@ public class Move {
         this.destinationLocation = destinationLocation;
     }
 
-    public Location getOrgin() {
+    public Location getOrginLocation() {
         return new Location(orginPiece.getRow(), orginPiece.getColumn());
     }
 
-    public Location getDestination() {
+    public Location getDestinationLocation() {
         return new Location(destinationLocation);
+    }
+
+    public Location getTakenLocation() {
+        return new Location(takenPiece.getRow(), takenPiece.getColumn());
     }
 
     public char getOrginType() {

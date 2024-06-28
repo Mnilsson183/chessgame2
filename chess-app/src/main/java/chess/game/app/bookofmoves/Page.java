@@ -6,7 +6,7 @@ import java.util.ArrayList;
  * Page
  */
 public class Page {
-    ArrayList<Move> moves;
+    private ArrayList<Move> moves;
 
     public Page() {
         moves = new ArrayList<Move>();

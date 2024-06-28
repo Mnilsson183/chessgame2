@@ -35,7 +35,7 @@ public class Queen extends Piece {
             int start = Math.min(this.location.getColumn(), column);
             int end = Math.max(this.location.getColumn(), column);
             for (int i = start + 1; i < end; i++) {
-                if (this.board.getPiece(row, i) != null) {
+                if (board.locationIsEmpty(i, column)) {
                     return false;
                 }
             }
@@ -43,7 +43,7 @@ public class Queen extends Piece {
             int start = Math.min(this.location.getRow(), row);
             int end = Math.max(this.location.getRow(), row);
             for (int i = start + 1; i < end; i++) {
-                if (this.board.getPiece(i, column) != null) {
+                if (board.locationIsEmpty(i, column)) {
                     return false;
                 }
             }
@@ -56,7 +56,7 @@ public class Queen extends Piece {
             while (r < endRow) {
                 r++;
                 c++;
-                if (this.board.getPiece(r, c) != null) {
+                if (board.locationIsEmpty(r, c)) {
                     return false;
                 }
             }
