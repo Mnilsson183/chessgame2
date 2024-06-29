@@ -4,8 +4,7 @@ import chess.game.app.board.Board;
 import chess.game.app.piece.Pawn;
 import chess.game.app.piece.Piece;
 import chess.game.app.util.Location;
-import static org.junit.Assert.assertEquals;
-//import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 public class MoveTest {
@@ -19,9 +18,9 @@ public class MoveTest {
         Piece piece2 = new Pawn(loc2, board, 'w');
 
         Move move1 = new Move(piece1, piece2, loc2);
-        assertEquals(move1.getOrginLocation(), loc1);
-        assertEquals(move1.getDestinationLocation(), loc2);
-        assertEquals(move1.getTakenLocation(), loc2);
+        assertTrue(move1.getOrginLocation().equals(loc1));
+        assertTrue(move1.getDestinationLocation().equals(loc2));
+        assertTrue(move1.getTakenLocation().equals(loc2));
     }
 
     @Test
@@ -35,6 +34,6 @@ public class MoveTest {
 
         Move move1 = new Move(piece1, piece2, loc2);
         Move move2 = new Move(piece1, piece2, loc2);
-        assertEquals(move1, move2);
+        assertTrue(move1.equals(move2));
     }
 }

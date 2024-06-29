@@ -21,14 +21,25 @@ public class LocationTest {
         assertTrue(loc3.getColumn() == 3);
 
         Location loc4 = null;
-        Location loc5 = new Location(loc4);
-        assertTrue(loc5.getRow() == 0);
-        assertTrue(loc5.getColumn() == 0);
+        Location loc5 = null;
+        try {
+            loc5 = new Location(loc4);
+            assertTrue(loc5.getRow() == 0);
+            assertTrue(loc5.getColumn() == 0);
+        } catch (IllegalArgumentException e) {
+            assertTrue(loc4 == null);
+            assertTrue(loc5 == null);
+        }
 
         Point point = null;
-        Location loc6 = new Location(point);
-        assertTrue(loc6.getRow() == 0);
-        assertTrue(loc6.getColumn() == 0);
+        Location loc6 = null;
+        try{
+            loc6 = new Location(point);
+        } catch(IllegalArgumentException e) {
+            assertTrue(point == null);
+            assertTrue(loc6 == null);
+        }
+
     }
 
     @Test

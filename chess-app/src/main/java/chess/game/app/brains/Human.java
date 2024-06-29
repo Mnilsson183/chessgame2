@@ -4,15 +4,15 @@ import chess.game.app.board.Board;
 import chess.game.app.bookofmoves.*;
 
 public class Human extends Brain{
-   public Human(Board board){
-    super(board);
-    this.setName("Human");
-   }
+    public Human(Board board){
+        super(board);
+        this.setName("Human");
+    }
    
     public Move getMove(Book book){
         if(book == null) throw new IllegalArgumentException("book cannot be null");
 
-        System.out.println(this.getBrain());
+        System.out.println(this.getName() + " is thinking...");
         return book.getMove(0);
     }
 }
