@@ -9,8 +9,8 @@
 
 # Maven project specific
 chess-app/target
-.classpath
-.project
+chess-app/.*
+!.gitignore
 
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/

@@ -17,7 +17,10 @@ public class Location {
     }
 
     public Location(Location location) {
-        this.location = new Point(location.getRow(), location.getColumn());
+        if(location == null)
+            this.location = new Point(0, 0);
+        else
+            this.location = new Point(location.getRow(), location.getColumn());
     }
 
     public int getRow() {

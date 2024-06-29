@@ -17,8 +17,9 @@ public class PieceUtils {
                 return 3;
             case 'q':
                 return 9;
+            case 'K':
             default:
-                return 0;
+                return -1;
         }
     }
 }
