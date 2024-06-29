@@ -13,9 +13,25 @@ public class Move {
     private Location destinationLocation;
 
     public Move(Piece orginPiece, Piece takenPiece, Location destinationLocation) {
+        if(orginPiece == null)
+            throw new IllegalArgumentException("orginPiece cannot be null");
+        if(takenPiece == null)
+            throw new IllegalArgumentException("takenPiece cannot be null");
+        if(destinationLocation == null)
+            throw new IllegalArgumentException("destinationLocation cannot be null");
+
         this.orginPiece = orginPiece;
         this.takenPiece = takenPiece;
         this.destinationLocation = destinationLocation;
+    }
+
+    public Move(Move move) {
+        if(move == null)
+            throw new IllegalArgumentException("move cannot be null");
+
+        this.orginPiece = move.orginPiece.copyPiece();
+        this.takenPiece = move.takenPiece.copyPiece();
+        this.destinationLocation = new Location(move.destinationLocation);
     }
 
     public Location getOrginLocation() {
@@ -55,5 +71,14 @@ public class Move {
 
     public int getDestinationPieceValue() {
         return PieceUtils.getPieceValue(this.getDestinationType());
+    }
+
+    public boolean equals(Move move) {
+        if(move == null)
+            return false;
+            
+        return this.getOrginLocation().equals(move.getOrginLocation())
+                && this.getDestinationLocation().equals(move.getDestinationLocation())
+                && this.getTakenLocation().equals(move.getTakenLocation());
     }
 }

@@ -10,6 +10,9 @@ abstract public class Piece {
     public char pieceChar;
 
     public Piece(Location location, Board board, char side) {
+        if(location == null) throw new IllegalArgumentException("location cannot be null");
+        if(board == null) throw new IllegalArgumentException("board cannot be null");
+
         this.location = location;
         this.board = board;
         this.side = side;
@@ -19,6 +22,7 @@ abstract public class Piece {
     abstract public boolean isValidMove(int row, int column);
 
     public boolean isValidMove(Location location){
+        if(location == null) return false;
         return isValidMove(location.getRow(), location.getColumn());
     }
 

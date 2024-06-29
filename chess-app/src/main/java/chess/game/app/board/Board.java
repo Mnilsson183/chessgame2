@@ -42,6 +42,9 @@ public class Board {
     }
 
     public Board(char[][] boardPiecesMap, char[][] boardSidesMap) {
+        if(boardPiecesMap == null) throw new IllegalArgumentException("boardPiecesMap cannot be null");
+        if(boardSidesMap == null) throw new IllegalArgumentException("boardSidesMap cannot be null");
+
         assert boardPiecesMap.length == boardSidesMap.length;
         assert boardPiecesMap[0].length == boardSidesMap[0].length;
         this.boardRows = boardPiecesMap.length;
@@ -51,6 +54,8 @@ public class Board {
 
 
     public Board(Board b) {
+        if(b == null) throw new IllegalArgumentException("b cannot be null");
+
         this.boardRows = b.boardRows;
         this.boardColumns = b.boardColumns;
         this.board = b.initBoardPiecesFromCharArray(b.getCharBoard(), b.getCharBoardSides());
@@ -89,6 +94,9 @@ public class Board {
     }
 
     private Piece[][] initBoardPiecesFromCharArray(char[][] charBoard, char[][] charSideBoard){
+        if(charBoard == null) throw new IllegalArgumentException("charBoard cannot be null");
+        if(charSideBoard == null) throw new IllegalArgumentException("charSideBoard cannot be null");
+
         if (charBoard.length != this.boardRows || charBoard[0].length != this.boardColumns) {
             return null;
         } else if(charSideBoard.length != this.boardRows || charSideBoard[0].length != this.boardColumns){
@@ -105,6 +113,8 @@ public class Board {
     }
 
     private Piece initBoardPiecesFromCharPiecesHelper(char c, Location location, char side){
+        if(location == null) throw new IllegalArgumentException("location cannot be null");
+
         switch (c) {
             case 'p':
                 return new Pawn(location, this, side);
@@ -125,11 +135,15 @@ public class Board {
     }
 
     public boolean executeMove(Move move) {
+        if(move == null) throw new IllegalArgumentException("move cannot be null");
+
         if(!validateMove(move)) return false;
         return movePiece(move);
     }
 
     private boolean movePiece(Move move){
+        if(move == null) throw new IllegalArgumentException("move cannot be null");
+
         Piece orginPiece = this.getPiece(move.getOrginLocation());
         Location destinationLocation = move.getDestinationLocation();
         Location takenLocation = move.getTakenLocation();
@@ -141,6 +155,8 @@ public class Board {
     }
 
     private boolean validateMove(Move move){
+        if(move == null) throw new IllegalArgumentException("move cannot be null");
+
         Piece orginPiece = this.getPiece(move.getOrginLocation());
         return orginPiece.isValidMove(move.getDestinationLocation());
     }
@@ -156,6 +172,7 @@ public class Board {
         }
         return book;
     }
+    // TODO this doesnt seem to be right these params are unused
 
     // generate from a piece location
     private Page generatePage(int r, int c) {
@@ -195,6 +212,7 @@ public class Board {
     }
 
     public boolean isTakeable(int row, int column, char orginSide) {
+        if(isOutOfBounds(row, column)) return false;
         return orginSide == getPiece(row, column).getSide();
     }
 

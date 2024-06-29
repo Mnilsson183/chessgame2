@@ -13,6 +13,7 @@ public class Book {
     }
 
     public void addMove(Move move) {
+        if(move == null) return;
         this.moves.add(move);
     }
 

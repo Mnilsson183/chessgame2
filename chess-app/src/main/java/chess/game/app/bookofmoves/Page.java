@@ -13,6 +13,7 @@ public class Page {
     }
 
     public void addMove(Move move) {
+        if(move != null) return;
         moves.add(move);
     }
 

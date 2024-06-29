@@ -10,6 +10,10 @@ public class Controller {
     private Board board;
 
     public Controller(Brain brain1, Brain brain2, Board board) {
+        if(brain1 == null) throw new IllegalArgumentException("brain1 cannot be null");
+        if(brain2 == null) throw new IllegalArgumentException("brain2 cannot be null");
+        if(board == null) throw new IllegalArgumentException("board cannot be null");
+        
         this.brain1 = brain1;
         this.brain2 = brain2;
         this.board = board;
