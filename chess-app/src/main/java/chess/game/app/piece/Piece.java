@@ -1,6 +1,7 @@
 package chess.game.app.piece;
 
 import chess.game.app.util.Location;
+import chess.game.app.util.PieceUtils;
 import chess.game.app.board.*;
 
 abstract public class Piece {
@@ -53,5 +54,9 @@ abstract public class Piece {
 
     public char getPieceChar() {
         return this.pieceChar;
+    }
+
+    public String toString(){
+        return PieceUtils.getPieceName(pieceChar) + " at " + this.location.toString();
     }
 }

@@ -37,4 +37,8 @@ public class Location {
         if(otherLocation == null) return false;
         return this.getRow() == otherLocation.getRow() && this.getColumn() == otherLocation.getColumn();
     }
+
+    public String toString() {
+        return "(" + getRow() + ", " + getColumn() + ")";
+    }
 }

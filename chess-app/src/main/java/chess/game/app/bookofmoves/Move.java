@@ -9,14 +9,13 @@ import chess.game.app.util.*;
  */
 public class Move {
     private Piece orginPiece;
+    // may be null
     private Piece takenPiece;
     private Location destinationLocation;
 
     public Move(Piece orginPiece, Piece takenPiece, Location destinationLocation) {
         if(orginPiece == null)
             throw new IllegalArgumentException("orginPiece cannot be null");
-        if(takenPiece == null)
-            throw new IllegalArgumentException("takenPiece cannot be null");
         if(destinationLocation == null)
             throw new IllegalArgumentException("destinationLocation cannot be null");
 
@@ -80,5 +79,12 @@ public class Move {
         return this.getOrginLocation().equals(move.getOrginLocation())
                 && this.getDestinationLocation().equals(move.getDestinationLocation())
                 && this.getTakenLocation().equals(move.getTakenLocation());
+    }
+
+    public String toString(){
+        if(this.takenPiece == null)
+            return "Orgin: " + this.orginPiece.toString() + " Destination: " + this.destinationLocation.toString();
+        else
+            return "Orgin: " + this.orginPiece.toString() + " Destination: " + this.takenPiece.toString() + " Taken: " + this.getTakenLocation();
     }
 }

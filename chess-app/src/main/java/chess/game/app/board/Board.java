@@ -166,27 +166,28 @@ public class Board {
         for (int r = 0; r < this.boardRows; r++) {
             for (int c = 0; c < this.boardColumns; c++) {
                 if (this.board[r][c] != null) {
-                    book.addPage(generatePage(r, c));
+                    Page page = generatePage(r, c);
+                    book.addPage(page);
                 }
             }
         }
         return book;
     }
-    // TODO this doesnt seem to be right these params are unused
+
+    // TODO make this account for the destination not being the same as the taken piece
 
     // generate from a piece location
     private Page generatePage(int r, int c) {
         Page page = new Page();
-        Piece piece = getPiece(boardRows, boardColumns);
+        Piece piece = getPiece(r, c);
         if(piece == null) return null;
         for (int row = 0; row < this.boardRows; row++) {
             for (int column = 0; column < this.boardColumns; column++) {
+                if(r == row && c == column) continue;
                 if (piece.isValidMove(row, column)) {
-                    page.addMove(
-                        new Move(
-                            piece,
-                            this.getPiece(row, column),
-                            new Location(row, column)));
+                        Move move = new Move(piece, getPiece(row, column),new Location(row, column));
+                        //System.out.println(move);
+                        page.addMove(move);
                 }
             }
         }
@@ -213,6 +214,8 @@ public class Board {
 
     public boolean isTakeable(int row, int column, char orginSide) {
         if(isOutOfBounds(row, column)) return false;
+        Piece piece = getPiece(row, column);
+        if(piece == null) return false;
         return orginSide == getPiece(row, column).getSide();
     }
 

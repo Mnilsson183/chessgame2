@@ -30,4 +30,16 @@ public class Book {
     public ArrayList<Move> getMoves() {
         return new ArrayList<Move>(this.moves);
     }
+
+    public String toString(){
+        if(moves.size() == 0) return "No moves in book";
+        StringBuilder sb = new StringBuilder();
+        sb.append("Book:\n");
+        for (Move move : moves) {
+            sb.append(move.toString());
+            sb.append("\n");
+        }
+        return sb.toString();
+    }
+    
 }

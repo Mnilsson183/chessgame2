@@ -1,6 +1,7 @@
 package chess.game.app.board;
 
 import chess.game.app.brains.Brain;
+import chess.game.app.bookofmoves.Book;
 import chess.game.app.bookofmoves.Move;
 
 public class Controller {
@@ -25,12 +26,14 @@ public class Controller {
             brain1.updateBoard();
             do {
                 System.out.println("Player 1's turn: ");
-                move = brain1.getMove(board.generateBook());
+                Book book = board.generateBook();
+                move = brain1.getMove(book);
             } while (board.executeMove(move) == false);
             brain2.updateBoard();
             do {
                 System.out.println("Player 2's turn: ");
-                move = brain2.getMove(board.generateBook());
+                Book book = board.generateBook();
+                move = brain2.getMove(book);
             } while (board.executeMove(move) == false);
         }
     }
